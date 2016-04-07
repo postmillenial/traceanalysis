@@ -1,0 +1,60 @@
+
+INSTALL
+---------
+
+just use a package manager :)
+sudo apt-get install jgraph will work
+
+GUIDELINES
+-----------
+
+To run jgraph, you usually do
+
+jgraph in.jgr > out.eps
+or
+jgraph -P in.jgr > out.ps
+The eps file is encapsulated postscript, which is used by other programs such as latex. 
+The ps file is plain postscript which may be viewed with gs or printed with lpr.
+If no input filename is given, jgraph will read from standard input.
+
+
+As with most of these programs, it's easiest to get conversant with jgraph by looking at examples.
+With jgraph, you specify to draw a new graph with the newgraph keyword. You can then add curves 
+to your graph with newcurve, and points to your curve with pts. Here's a simple example:
+
+newgraph
+newcurve pts 2 3   4 5   1 6
+
+To take a look at this graph, do:
+
+UNIX> jgraph -P simp1.jgr > simp1.ps
+UNIX> gs simp1.ps
+
+Or, just look at the postscript output with netscape.
+What this has done is draw a simple graph with three points: (2,3), (4,5) and (1,6). Jgraph
+added axes and chose how to plot the points. It's not very pretty, but it's a start.
+
+Next, take a look at simp2.jgr. This is a slightly more complex jgraph example. Let's break it into pieces:
+
+newgraph
+xaxis size 2 
+yaxis size 1.5 
+
+As before, the newgraph starts the graph. Next, the sizes of the two axes (in inches) are set.
+After that, three curves are drawn:
+
+newcurve pts 0 6  1 9  2 11  3 14  4 18 5 20
+newcurve marktype triangle linetype solid
+         pts 0 3  1 4  2 7  3 9  4 10 5 13
+newcurve marktype none linetype dashed color 1 0 0
+         pts 0 0  1 2  2 3  3 5  4 6  5 9
+
+The first lets jgraph choose the drawing style. The second plots the points with triangles, 
+and connects them with a solid line. The third does not plot the points, but just the line 
+connecting them. The line will be dashed, and its color will be red (colors are specified as rgb 
+values where 1 is full saturation). Take a look at the jgraph output. You'll note that 
+jgraph's axes have been made just large enough to plot all the points.
+The valid marktypes and linetypes are defined in the man page. You may use newline 
+instead of ``newcurve marktype none linetype solid''
+
+

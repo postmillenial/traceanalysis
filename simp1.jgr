@@ -1,0 +1,5 @@
+(* Simple jgraph *)
+
+newgraph
+
+newcurve pts 2 3   4 5   1 6
